@@ -1,5 +1,4 @@
 - name: Pull Request Card Automation
-
 on: pull_request:
   types: [opened]
   branches:
