@@ -9,8 +9,8 @@ jobs:
   PR-Card-Automation:
     runs-on: ubuntu-latest
     steps: 
-      -uses: alex-page/github-project-automation-plus@v0.8.1
-      with: 
-        project: resumkr
-        column: Code Review
-        repo-token: ${{'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'}}
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        with: 
+          project: resumkr
+          column: Code Review
+          repo-token: ${{'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'}}
