@@ -2,9 +2,9 @@ name: Pull Request Card Automation
 
 on: 
   pull_request:
-    types: [opened, reopened]
+    types: [opened]
     branches:
-      - '*'
+      - dev
 jobs:
   PR-Card-Automation:
     runs-on: ubuntu-latest
