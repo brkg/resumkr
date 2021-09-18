@@ -3,7 +3,7 @@ name: Assigned Issue Automation
 on:
   issues:
    types: 
-    - assigned
+    -assigned
 
 jobs: 
   issue-automation:
