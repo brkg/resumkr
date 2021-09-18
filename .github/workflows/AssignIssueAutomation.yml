@@ -3,6 +3,8 @@ name: Assigned Issue Automation
 on:
   issues:
    types: [assigned]
+   branches:
+    - '*'
 
 jobs: 
   issue-automation:

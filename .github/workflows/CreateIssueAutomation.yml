@@ -3,6 +3,8 @@ name: move new issues into To Do
 on:
   issues:
    types: [opened]
+   branches:
+    - '*'
 
 jobs: 
   issue-automation:
