@@ -11,6 +11,6 @@ jobs:
     steps: 
       - uses: alex-page/github-project-automation-plus@v0.8.1
         with: 
-          project: resumkr
+          project: resumaker
           column: Code Review
           repo-token: ${{secrets.PAO}}
