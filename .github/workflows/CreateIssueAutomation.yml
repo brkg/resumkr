@@ -12,3 +12,4 @@ jobs:
         with:
           project-name: resumaker
           column-name: To Do
+          token: ${{secrets.PAO}}

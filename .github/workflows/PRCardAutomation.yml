@@ -13,4 +13,4 @@ jobs:
         with: 
           project: resumaker
           column: Code Review
-          token: ${{secrets.PAO}}
+          repo-token: ${{secrets.PAO}}
