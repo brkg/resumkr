@@ -4,7 +4,6 @@ on:
   issues:
    types: 
     - assigned
-
 jobs: 
   issue-automation:
     runs-on: ubuntu-latest
