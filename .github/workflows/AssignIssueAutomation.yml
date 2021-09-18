@@ -1,15 +1,13 @@
-name: Assigned Issue Automation
-
-on:
-  issues:
-   types: [assigned]
-
-jobs: 
-  issue-automation:
+name: Add a new GitHub Project card linked to a GitHub issue to the specified project column
+on: [issues]
+jobs:
+  github-actions-automate-projects:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.8.1
-        with: 
-          project: resumaker
-          column: In Progress
-          repo-token: ${{secrets.PAO}}
+    - name: add-new-issues-to-repository-based-project-column
+      uses: docker://takanabe/github-actions-automate-projects:v0.0.1
+      if: github.event_name == 'issues' && github.event.action == 'assigned'
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAO }}
+        GITHUB_PROJECT_URL: https://github.com/brkg/resumkr/projects/1
+        GITHUB_PROJECT_COLUMN_NAME: In Progress
