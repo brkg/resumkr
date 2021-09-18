@@ -1,8 +1,9 @@
 name: create new issue in board
 
 on:
-  issues
-    types: [opened]
+  issues:
+    types: 
+      - opened
     
 jobs:
   createCard:
