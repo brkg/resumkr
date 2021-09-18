@@ -6,15 +6,15 @@ import SidePanel from "./Components/SidePanel";
 import { useState } from "react";
 
 function App() {
-  const [buttonPopup, setButtonPopup] = useState(false);
+  const [loginPopup, setLoginPopup] = useState(false);
 
   return (
     <div className="page">
-      <LoginSignUp trigger={buttonPopup} setTrigger={setButtonPopup} />
+      <LoginSignUp trigger={loginPopup} setTrigger={setLoginPopup} />
       <SidePanel />
       <CVinput />
       <CVdisplay />
-      <button onClick={() => setButtonPopup(true)} className="Login/SignUp">
+      <button onClick={() => setLoginPopup(true)} className="Login/SignUp">
         Login/SignUp
       </button>
     </div>
