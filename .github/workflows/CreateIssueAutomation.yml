@@ -1,17 +1,14 @@
-name: move new issues into To Do
+name: create new issue in board
 
 on:
   issues:
-   types: [opened]
-   branches:
-    - '*'
-
-jobs: 
-  create-card:
-    runs-on: ubuntu latest
+    types: [opened]
+jobs:
+  createCard:
+    runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.8.1
-        with: 
-          project: resumaker
-          column: To Do
-          repo-token: ${{secrets.PAO}}
+      - name: Create or Update Project Card
+        uses: peter-evans/create-or-update-project-card@v1
+        with:
+          project-name: resumaker
+          column-name: To Do
