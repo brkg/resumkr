@@ -1,7 +1,7 @@
 name: create new issue in board
 
 on:
-  issues:
+  issues
     types: [opened]
     
 jobs:
