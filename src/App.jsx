@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import LoginSignUp from "./Components/LoginSignUp";
 import CVdisplay from "./Components/CVdisplay";
 import CVinput from "./Components/CVinput";
-import SidePanel from "./Components/SidePanel";
+import SidePanel from "./Components/SidePanel/SidePanel";
 import { useState } from "react";
 
 function App() {

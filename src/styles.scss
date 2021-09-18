@@ -42,6 +42,7 @@ body {
         text-shadow: 0px 0px 0px black;
         text-shadow: 0px 0px 0px black;
         color: black;
+        z-index: 5;
         .line {
           padding: 10px;
           display: flex;
@@ -99,6 +100,7 @@ body {
       top: 0px;
       right: 0px;
       padding: 10px;
+      padding-top: 5vh;
       background-color: rgba(0, 0, 0, 0.8);
       height: 100vh;
       width: 35vw;
@@ -112,7 +114,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: stretch;
-        margin-bottom: 3vh;
+        margin-bottom: 5vh;
         h1 {
           align-self: flex-start;
           color: white;
@@ -143,39 +145,114 @@ body {
           background-color: red;
           border: 2px white solid;
         }
-        #addTech {
-          background-color: green;
-          border: 1px white solid;
-          border-radius: 50%;
-          margin-right: 50px;
-          color: white;
-          height: 50px;
-          width: 50px;
-          font-size: 1vw;
-        }
-        #addTech:hover {
-          background-color: white;
-          border: 1px green solid;
-          color: green;
-        }
-        .techDisplay {
-          background-color: white;
-          padding: 5px;
-          border-radius: 5px;
-          display: flex;
-          flex-wrap: wrap;
-          flex-grow: 1;
-          .tech {
-            padding: 5px;
-            margin: 2px;
-            padding-left: 5px;
-            background-color: steelblue;
-            border-radius: 5px;
-            color: white;
-          }
-        }
-        .entrySuggestionsContainer {
+        // #addTech {
+        //   background-color: green;
+        //   border: 1px white solid;
+        //   border-radius: 50%;
+        //   margin-right: 50px;
+        //   color: white;
+        //   height: 50px;
+        //   width: 50px;
+        //   font-size: 1vw;
+        // }
+        // #addTech:hover {
+        //   background-color: white;
+        //   border: 1px green solid;
+        //   color: green;
+        // }
+        // .techDisplay {
+        //   background-color: white;
+        //   padding: 5px;
+        //   border-radius: 5px;
+        //   display: flex;
+        //   flex-wrap: wrap;
+        //   flex-grow: 1;
+        //   .tech {
+        //     padding: 5px;
+        //     margin: 2px;
+        //     padding-left: 5px;
+        //     background-color: steelblue;
+        //     border-radius: 5px;
+        //     color: white;
+        //   }
+        // }
+        .TechnologySelect {
           width: 100%;
+        }
+      }
+      #sidePanelTop {
+        display: flex;
+        justify-content: space-between;
+      }
+      .entrySelection {
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        width: 100%;
+        // background-color: rgba(256, 256, 256, 0.2);
+        // border-radius: 5px;
+        padding: 2vh;
+        .selectTypeOfEntry {
+          align-self: center;
+          width: 50%;
+          margin-bottom: 2vh;
+        }
+        .entriesToSelect {
+          padding: 5px;
+          gap: 5px;
+          .suggestion {
+            display: flex;
+            background: white;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            .leftPart {
+              display: flex;
+              flex-direction: column;
+              margin-left: 5px;
+              margin-right: 5px;
+              .entryName {
+                font-size: 2vh;
+                font-weight: bold;
+              }
+              .dates {
+                font-size: 1.5vh;
+                text-align: center;
+              }
+            }
+            .content {
+              flex-grow: 1;
+              font-size: 1.5vh;
+              align-self: center;
+            }
+            .actions {
+              display: flex;
+              flex-direction: column;
+              align-self: center;
+              margin-left: 5px;
+              margin-right: 5px;
+              button {
+                border-radius: 5px;
+                border: white 1px solid;
+              }
+              .add {
+                background: green;
+                color: white;
+              }
+              .hide {
+                background: red;
+                color: white;
+              }
+              .add:hover {
+                background: white;
+                color: green;
+              }
+              .hide:hover {
+                background: white;
+                color: red;
+              }
+            }
+          }
         }
       }
     }
