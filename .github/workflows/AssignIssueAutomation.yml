@@ -2,8 +2,8 @@ name: Assigned Issue Automation
 
 on:
   issues:
-   types: 
-    - assigned
+   types: [assigned]
+
 jobs: 
   issue-automation:
     runs-on: ubuntu-latest
