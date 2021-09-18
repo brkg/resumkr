@@ -9,8 +9,12 @@ export default function ResumeSuggestion(props) {
       </div>
       <div className="content">{props.content}</div>
       <div className="actions">
-        <button className="add">+</button>
-        <button className="hide">-</button>
+        <button className="add" onClick={() => console.log("Add", props.id)}>
+          +
+        </button>
+        <button className="hide" onClick={() => console.log("Hide", props.id)}>
+          -
+        </button>
       </div>
     </div>
   );

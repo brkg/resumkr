@@ -6,7 +6,7 @@ import SidePanel from "./Components/SidePanel/SidePanel";
 import { useState } from "react";
 
 function App() {
-  const [loginPopup, setLoginPopup] = useState(false);
+  const [loginPopup, setLoginPopup] = useState(true);
   const [cvInputPage, setCvInputPage] = useState(false);
   const [cvDisplayPage, setcvDisplayPage] = useState(false);
   const [sidePanelPopup, setSidePanelPopup] = useState(false);

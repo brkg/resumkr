@@ -38,7 +38,7 @@ export default function SidePanel(props) {
       />
     );
 
-  return true ? (
+  return props.trigger ? (
     <div className="sidePanel">
       <div className="line" id="sidePanelTop">
         <h1> Resume Generator </h1>
