@@ -17,11 +17,17 @@ export default function LoginSignUp(props) {
     password,
   };
 
-  const login = () => {
+  const login = async () => {
     console.log("login", inputs);
+    //here goes a function to submit a login[GET] fetch request to the backend
+    //await will need to be used before doing anything as we need to ensure the login information is valid before proceeding.
+    //one of the last functionnality will be props.setTrigger(false) to close the popup
   };
-  const signup = () => {
+  const signup = async () => {
     console.log("signup", inputs);
+    //here goes a function to submit a signup[POST] fetch request to the backend
+    //await will need to be used before doing anything as we need to ensure the signup information is valid before proceeding..
+    //one of the last functionnality will be props.setTrigger(false) to close the popup
   };
 
   return props.trigger ? (
