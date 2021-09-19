@@ -1,30 +1,48 @@
-import React from 'react';
-import {useState} from React;
+import React, { useEffect, useState } from 'react';
 
-function CVInput(props) {
-  const submit = () => {
+import ExperienceEntry from './ExperienceEntry';
+
+function CVentry(props) {
+  const initialArray = [
+      <ExperienceEntry key='0' />,
+      <ExperienceEntry key='1' />,
+      <ExperienceEntry key='2' />,
+      <ExperienceEntry key='3' />,
+      <ExperienceEntry key='4' />
+  ];
+  const [rows, countRows] = useState([initialArray]);
+  const [keyCount, counter] = useState(5);
+
+  const addRow = () =>{
+    let tempRows = rows.slice();
+    counter(keyCount=> keyCount += 1)
+    tempRows.push(<ExperienceEntry key={keyCount}/>);
+    return tempRows;
+  }
+
+  const submit = () =>{
 
   }
+  
   return (
+    props.trigger ? 
     <div id='signupContainer'>
-      <div id='signupContainerInner'>
-        <div id='labelAndInput'>
-          <label htmlFor='SIGNUP_username'>Username: </label>
-          <input type='text' id='SIGNUP_username'></input> 
-        </div>          
-        <div id='labelAndInput'>
-          <label htmlFor='SIGNUP_password'>Password: </label>
-          <input type='password' id='SIGNUP_password'></input> 
-        </div>
-        <div id='labelAndInput'>
-          <label htmlFor='SIGNUP_phone'>Phone: </label>
-          <input type='password' id='SIGNUP_phone' onKeyDown={submit}></input>
-        </div>
+      <div id='labelAndInput'>
+        <input type='text' id='firstName' placeholder='Full Name'></input> 
+      </div>          
+      <div id='labelAndInput'>
+        <input type='text' id='lastName' placeholder='Job Title'></input> 
       </div>
-      <button id='submitExperience'></button>
+      <div id='labelAndInput'>
+        <input type='text' id='email' placeholder = 'Email'></input>
+      </div>
+      <div id='experienceRows'>
+        {rows}
+      </div>
+      <button id='addMoreExperiences' onClick={() => countRows(addRow)}></button>
     </div>
-    // false ? <h3>  </h3> : ""
+    : ""
   );
 }
 
-export default CVInput;
+export default CVentry;

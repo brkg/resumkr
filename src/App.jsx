@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import LoginSignUp from "./Components/LoginSignUp";
 import CVdisplay from "./Components/CVdisplay";
-import CVinput from "./Components/CVinput";
+import CVentry from "./Components/CVentry";
 import SidePanel from "./Components/SidePanel";
 import { useState } from "react";
 
@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="page">
       <LoginSignUp trigger={loginPopup} setTrigger={setLoginPopup} />
-      <CVinput trigger={cvInputPage} setTrigger={setCvInputPage} />
+      <CVentry trigger={cvInputPage} setTrigger={setCvInputPage} />
       <CVdisplay trigger={cvDisplayPage} setTrigger={setcvDisplayPage} />
       <SidePanel trigger={sidePanelPopup} setTrigger={setSidePanelPopup} />
       <button onClick={() => setLoginPopup(true)} className="Login/SignUpBtn">
