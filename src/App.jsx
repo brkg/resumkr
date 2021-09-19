@@ -1,22 +1,18 @@
 import React, { Component } from "react";
 import LoginSignUp from "./Components/LoginSignUp";
 import CVdisplay from "./Components/CVdisplay";
-import CVentry from "./Components/CVentry";
-import SidePanel from "./Components/SidePanel";
+import CVinput from "./Components/CVinput";
+import SidePanel from "./Components/SidePanel/SidePanel";
 import { useState } from "react";
 
 function App() {
-  const [loginPopup, setLoginPopup] = useState(false);
+  const [loginPopup, setLoginPopup] = useState(true);
   const [cvInputPage, setCvInputPage] = useState(false);
   const [cvDisplayPage, setcvDisplayPage] = useState(false);
   const [sidePanelPopup, setSidePanelPopup] = useState(false);
 
   return (
     <div className="page">
-      <LoginSignUp trigger={loginPopup} setTrigger={setLoginPopup} />
-      <CVentry trigger={cvInputPage} setTrigger={setCvInputPage} />
-      <CVdisplay trigger={cvDisplayPage} setTrigger={setcvDisplayPage} />
-      <SidePanel trigger={sidePanelPopup} setTrigger={setSidePanelPopup} />
       <button onClick={() => setLoginPopup(true)} className="Login/SignUpBtn">
         Login/SignUp
       </button>
@@ -29,6 +25,10 @@ function App() {
       <button onClick={() => setSidePanelPopup(true)} className="SidePanelBtn">
         SidePanel
       </button>
+      <LoginSignUp trigger={loginPopup} setTrigger={setLoginPopup} />
+      <CVinput trigger={cvInputPage} setTrigger={setCvInputPage} />
+      <CVdisplay trigger={cvDisplayPage} setTrigger={setcvDisplayPage} />
+      <SidePanel trigger={sidePanelPopup} setTrigger={setSidePanelPopup} />
     </div>
   );
 }
