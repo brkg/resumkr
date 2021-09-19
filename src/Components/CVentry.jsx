@@ -14,4 +14,4 @@ function CVentry(props){
   );
 }
 
-export default ExperienceEntry;
+export default CVentry;
