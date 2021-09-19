@@ -15,7 +15,7 @@ function CVentry(props) {
 
   const addRow = () =>{
     let tempRows = rows.slice();
-    counter(keyCount=> keyCount += 1)
+    counter(keyCount => keyCount += 1)
     tempRows.push(<ExperienceEntry key={keyCount}/>);
     return tempRows;
   }
