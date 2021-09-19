@@ -1,7 +1,14 @@
 import React from "react";
 
 function CVdisplay(props) {
-  return false ? <h3> CVdisplay </h3> : "";
+  return true ? (
+    <div className="cvDisplay">
+      <h3> CVdisplay </h3>
+      <div className="cvBackground"></div>
+    </div>
+  ) : (
+    ""
+  );
 }
 
 export default CVdisplay;

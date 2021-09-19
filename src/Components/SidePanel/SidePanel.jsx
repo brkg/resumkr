@@ -25,7 +25,7 @@ export default function SidePanel(props) {
     entryName: "Amazon",
     dates: ["20-01-01", "20-06-01"],
     content:
-      "sjifoseofisoi efjiosjioefj esiofg p[tyojpkgtj soiefj iosjf \n awdawdawdaw ad adw awd awdwdad",
+      "sjifoseofisoi efjiosjioefj esiofg p[tyojpkgtj soiefj iosjf \n awdawdawdaw ad adw awd rter trtertert awdwdad \n awdawdawdaw ad adw awd awdwdad",
   };
   for (let i = 0; i < 5; i++)
     suggestedEntries.push(
