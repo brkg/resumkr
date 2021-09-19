@@ -21,7 +21,13 @@ function CVinput(props) {
   }
 
   const submit = () =>{
-
+    fetch('/api/submit', {
+      method: POST,
+      headers: {
+        'Content-Type': 'Application/JSON'
+      },
+      // body: JSON.stringify()
+    })
   }
   
   return (
@@ -39,7 +45,8 @@ function CVinput(props) {
       <div id='experienceRows'>
         {rows}
       </div>
-      <button id='addMoreExperiences' onClick={() => countRows(addRow)}></button>
+      <button id='addMoreExperiences' onClick={() => countRows(addRow)}>MORE ROWS</button>
+      <button id='submit cv' onClick={submit}>SUBMIT</button>
     </div>
     : ""
   );
