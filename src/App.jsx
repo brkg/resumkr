@@ -36,11 +36,11 @@ const initialState = {
         skills: ["C++", "Java", "MongoDB", "ExpressJS"],
       },
       {
-        entryName: "Resumkr",
+        entryName: "microsoftJavaResumkr",
         dates: ["20-01-01", "20-06-01"],
         content:
           "sjifoseofisoi efjiosjioefj esiofg p[tyojpkgtj soiefj iosjf \n awdawdawdaw ad adw awd rter trtertert awdwdad \n awdawdawdaw ad adw awd awdwdad",
-        skills: ["reactJS", "javascript", "PosteGreSQL", "ExpressJS"],
+        skills: ["C#", "java", "PosteGreSQL", "ExpressJS"],
       },
       {
         entryName: "Resumkr",
@@ -171,6 +171,23 @@ function App() {
         jobs={cv.jobs}
         updateJobs={onSubmit}
       />
+      <div className="buttons">
+        <button onClick={() => setLoginPopup(true)} className="Login/SignUpBtn">
+          Login/SignUp
+        </button>
+        <button onClick={() => setCvInputPage(true)} className="CVinput">
+          CVinput
+        </button>
+        <button onClick={() => setcvDisplayPage(true)} className="CVdetails">
+          CVdetails
+        </button>
+        <button
+          onClick={() => setSidePanelPopup(true)}
+          className="SidePanelBtn"
+        >
+          SidePanel
+        </button>
+      </div>
       <SidePanel
         trigger={sidePanelPopup}
         setTrigger={setSidePanelPopup}
@@ -179,18 +196,6 @@ function App() {
         addToResume={setresumeJobs}
         resume={state.resume}
       />
-      {/* <button onClick={() => setLoginPopup(true)} className="Login/SignUpBtn">
-        Login/SignUp
-      </button>
-      <button onClick={() => setCvInputPage(true)} className="CVinput">
-        CVinput
-      </button>
-      <button onClick={() => setcvDisplayPage(true)} className="CVdetails">
-        CVdetails
-      </button>
-      <button onClick={() => setSidePanelPopup(true)} className="SidePanelBtn">
-        SidePanel
-      </button> */}
     </div>
   );
 }

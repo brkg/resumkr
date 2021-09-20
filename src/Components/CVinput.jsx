@@ -63,7 +63,7 @@ function CVinput(props) {
     // });
   };
 
-  return true ? (
+  return props.trigger ? (
     <div id="signupContainer">
       <div className="topRowContainer">
         <div className="labelAndInput">
@@ -76,6 +76,7 @@ function CVinput(props) {
           <input type="text" id="email" placeholder="Email"></input>
         </div>
       </div>
+
       <div id="experienceRows">{rows}</div>
       <button id="addMoreExperiences" onClick={() => countRows(addRow)}>
         MORE ROWS
