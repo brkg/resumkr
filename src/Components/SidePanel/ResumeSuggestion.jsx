@@ -5,7 +5,7 @@ export default function ResumeSuggestion(props) {
     <div className="suggestion">
       <div className="leftPart">
         <div className="entryName">{props.entryName}</div>
-        <div className="dates">{`${props.dates[0]} \n ${props.dates[1]}`}</div>
+        <div className="suggDates">{`${props.dates[0]} \n ${props.dates[1]}`}</div>
       </div>
       <div className="content">{props.content}</div>
       <div className="actions">

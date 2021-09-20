@@ -7,6 +7,9 @@ body {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
+  margin: 0px;
+  height: 100%;
+  // height: 100vh;
   // color: white;
   // font-size: 2vw;
   // text-shadow: 2px 2px 5px black;
@@ -14,8 +17,13 @@ body {
 }
 
 #app {
-  height: 100vh;
   .page {
+    //Refactor the display of CVdisplay and side pannel so CV display takes the whole space
+    //Most likely use display flex and space between with min width for the CVdisplay
+    height: 100vh;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
     .LoginPopup {
       position: absolute;
       top: 0px;
@@ -96,19 +104,20 @@ body {
       }
     }
     .sidePanel {
-      position: absolute;
-      top: 0px;
-      right: 0px;
+      // position: absolute;
+      // top: 0px;
+      // right: 0px;
+      // bottom: 0px;
       padding: 10px;
-      padding-top: 5vh;
+      padding-top: 3vh;
       padding-right: 2vh;
       padding-left: 2vh;
       background-color: rgba(0, 0, 0, 0.8);
-      height: 100vh;
-      width: 35vw;
+      // height: 100%;
+      max-width: 40vw;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: stretch;
       .line {
         display: flex;
@@ -119,7 +128,7 @@ body {
           align-self: flex-start;
           color: white;
           padding: 0%;
-          font-size: 3vw;
+          font-size: 3vh;
           margin-block-start: 0em;
           margin-block-end: 0em;
         }
@@ -187,6 +196,7 @@ body {
         flex-direction: column;
         align-content: center;
         width: 100%;
+        margin-bottom: 5vh;
         // background-color: rgba(256, 256, 256, 0.2);
         // border-radius: 5px;
         .selectTypeOfEntry {
@@ -208,17 +218,17 @@ body {
               margin-left: 5px;
               margin-right: 5px;
               .entryName {
-                font-size: 2vh;
+                font-size: 1.5vh;
                 font-weight: bold;
               }
-              .dates {
-                font-size: 1.5vh;
+              .suggDates {
+                font-size: 1.2vh;
                 text-align: center;
               }
             }
             .content {
               flex-grow: 1;
-              font-size: 1.5vh;
+              font-size: 1.2vh;
               align-self: center;
             }
             .actions {
@@ -252,10 +262,112 @@ body {
         }
       }
     }
-    .cvDisplay {
-      background-color: white;
-      max-width: 54vw;
-      margin-left: 3vw;
+    .cvDisplayOuter {
+      display: flex;
+      align-items: stretch;
+      .cvDisplay {
+        background-color: white;
+        border-radius: 5px;
+        padding-top: 3vh;
+        padding-bottom: 2vh;
+        padding-right: 3vh;
+        padding-left: 3vh;
+        margin: 2vh;
+        font-size: 1.2vh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 2px 2px 10px black;
+        box-shadow: -2px 2px 10px black;
+        .years {
+          font-size: 1vh;
+        }
+        .leftBlock {
+          min-width: 30%;
+        }
+        .sectionTitle {
+          color: purple;
+          font-weight: bold;
+          font-size: 1.5vh;
+          display: flex;
+          gap: 2%;
+          .leftTitle {
+            width: 28%;
+          }
+          .textTitle {
+            min-width: fit-content;
+          }
+          .rightTitle {
+            flex-grow: 1;
+          }
+        }
+        .generalInfo {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 2vh;
+          .nameBlock {
+            color: purple;
+            font-size: 1.7vh;
+            .name {
+              font-size: 3vh;
+              font-weight: bold;
+            }
+          }
+          .contactsBlocks {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 2px;
+          }
+        }
+        .experiences {
+          margin-bottom: 2vh;
+          .experienceList {
+            display: flex;
+            flex-direction: column;
+            .experience {
+              display: flex;
+              padding-top: 1vh;
+              padding-bottom: 1vh;
+            }
+          }
+        }
+        .educations {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          .educationList {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            .education {
+              display: flex;
+              justify-content: flex-start;
+              padding-top: 1vh;
+              padding-bottom: 1vh;
+              .leftBlock {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+              }
+            }
+          }
+        }
+        .skills {
+          display: flex;
+          flex-direction: column;
+          justify-items: flex-start;
+          align-items: stretch;
+          .skillsList {
+            display: grid;
+            padding-top: 1vw;
+            padding-bottom: 2vw;
+            grid-template-columns: 30% 35% 35%;
+            row-gap: 12px;
+          }
+        }
+      }
     }
   }
 }
@@ -269,5 +381,19 @@ body {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .cvDisplay {
+    // height: 90vh;
+    width: 69.55vh;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .cvDisplay {
+    height:78vw;
+    width: 60.27vw;
   }
 }

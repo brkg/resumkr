@@ -13,7 +13,13 @@ function App() {
 
   return (
     <div className="page">
-      <button onClick={() => setLoginPopup(true)} className="Login/SignUpBtn">
+      <div className="cvDisplayOuter">
+        <CVdisplay trigger={cvDisplayPage} setTrigger={setcvDisplayPage} />
+      </div>
+      <LoginSignUp trigger={loginPopup} setTrigger={setLoginPopup} />
+      <CVinput trigger={cvInputPage} setTrigger={setCvInputPage} />
+      <SidePanel trigger={sidePanelPopup} setTrigger={setSidePanelPopup} />
+      {/* <button onClick={() => setLoginPopup(true)} className="Login/SignUpBtn">
         Login/SignUp
       </button>
       <button onClick={() => setCvInputPage(true)} className="CVinput">
@@ -24,11 +30,7 @@ function App() {
       </button>
       <button onClick={() => setSidePanelPopup(true)} className="SidePanelBtn">
         SidePanel
-      </button>
-      <LoginSignUp trigger={loginPopup} setTrigger={setLoginPopup} />
-      <CVinput trigger={cvInputPage} setTrigger={setCvInputPage} />
-      <CVdisplay trigger={cvDisplayPage} setTrigger={setcvDisplayPage} />
-      <SidePanel trigger={sidePanelPopup} setTrigger={setSidePanelPopup} />
+      </button> */}
     </div>
   );
 }

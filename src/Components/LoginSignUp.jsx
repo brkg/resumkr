@@ -11,10 +11,12 @@ const useInput = (init) => {
 export default function LoginSignUp(props) {
   const [username, usernameOnChange] = useInput("");
   const [password, passwordOnChange] = useInput("");
+  const [fullName, fullNameOnChange] = useInput("");
 
   const inputs = {
     username,
     password,
+    fullName,
   };
 
   const login = () => {
@@ -31,11 +33,18 @@ export default function LoginSignUp(props) {
     //await will need to be used before doing anything as we need to ensure the signup information is valid before proceeding..
     //one of the last functionnality will be props.setTrigger(false) to close the popup
   };
-
-  return props.trigger ? (
+  const signInOauth = () => {
+    console.log("signup", inputs);
+    //Add Asynchronicity
+    //here goes a function to submit a signup[POST] fetch request to the backend
+    //await will need to be used before doing anything as we need to ensure the signup information is valid before proceeding..
+    //one of the last functionnality will be props.setTrigger(false) to close the popup
+  };
+  // props.trigger
+  return false ? (
     <div className="LoginPopup">
       <div className="LoginPopup-inner">
-        <h3> LoginSignUp </h3>
+        <h3> Authentication </h3>
         <button
           id="popupClose"
           onClick={() => props.setTrigger(false)}
@@ -66,11 +75,25 @@ export default function LoginSignUp(props) {
           />
         </div>
         <div className="line">
-          <button className="Login" onClick={() => login()}>
-            Login
-          </button>
+          <label htmlFor="fullName">Full Name</label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            placeholder="Banana King"
+            value={fullName}
+            onChange={fullNameOnChange}
+          />
+        </div>
+        <div className="line">
           <button className="Signup" onClick={() => signup()}>
-            Signup
+            SignUp
+          </button>
+          <button className="Login" onClick={() => login()}>
+            LogIn
+          </button>
+          <button className="SignInWithOauth" onClick={() => signInOauth()}>
+            Oauth
           </button>
         </div>
       </div>
