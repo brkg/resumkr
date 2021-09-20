@@ -9,6 +9,8 @@ const axios = require("axios").default;
 const initialState = {
   cv: {
     fullName: "",
+    contact: "", //stretch: contactInfo object with email, number, etc
+    resumeTitle: "",
     education: "", //stringify before sending to backend, parse when received
     jobs: [],
     skills: [],
@@ -26,9 +28,11 @@ const initialState = {
 
 function App() {
   const [loginPopup, setLoginPopup] = useState(true);
-  const [cvInputPage, setCvInputPage] = useState(false);
+  const [cvInputPage, setCvInputPage] = useState(true);
   const [cvDisplayPage, setcvDisplayPage] = useState(false);
   const [sidePanelPopup, setSidePanelPopup] = useState(false);
+  const [cv, setCV] = useState(initialState.cv);
+  const [state, setState] = useState(initialState);
 
   async function login(inputs) {
     try {
@@ -61,6 +65,12 @@ function App() {
 
   //add function to set the popup to false if the back says that the user is identified or has cookies.
 
+  function onSubmit(obj) {
+    const tempCV = {...cv, fullName: obj.fullName, resumeTitle: obj.title, jobs: obj.jobs };
+    setState({...state, cv: tempCV})
+    // console.log(state.cv);
+  }
+
   return (
     <div className="page">
       <div className="cvDisplayOuter">
@@ -79,7 +89,8 @@ function App() {
       <CVinput
         trigger={cvInputPage}
         setTrigger={setCvInputPage}
-        cv={"state.cv"}
+        jobs={cv.jobs}
+        updateJobs={onSubmit}
       />
       <SidePanel
         trigger={sidePanelPopup}
