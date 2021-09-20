@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened]
     branches:
-      - dev
+      - main
 jobs:
   PR-Card-Automation:
     runs-on: ubuntu-latest
