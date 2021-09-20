@@ -32,7 +32,7 @@ export default function LoginSignUp(props) {
     //one of the last functionnality will be props.setTrigger(false) to close the popup
   };
 
-  return props.trigger ? (
+  return false ? (
     <div className="LoginPopup">
       <div className="LoginPopup-inner">
         <h3> LoginSignUp </h3>
