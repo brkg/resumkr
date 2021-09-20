@@ -3,7 +3,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import ResumeSuggestion from "./ResumeSuggestion";
 
-const options = [
+const skillsRef = [
   { value: "reactJS", label: "reactJS" },
   { value: "javascript", label: "javascript" },
   { value: "ExpressJS", label: "ExpressJS" },
@@ -38,52 +38,42 @@ export default function SidePanel(props) {
       />
     );
 
-  return props.trigger ? (
+  return true ? (
     <div className="sidePanel">
-      <div className="line" id="sidePanelTop">
-        <h1> Resume Generator </h1>
-        <button
-          id="sidePanelToggle"
-          onClick={() => props.setTrigger(false)}
-          className="sidePanelToggle"
-        >
-          X
-        </button>
-      </div>
-      {/* <div className="line">
-        <button id="addTech">+</button>
-        <div className="techDisplay">
-          <div className="tech">reactJS</div>
-          <div className="tech">javascript</div>
-          <div className="tech">node</div>
-          <div className="tech">ExpressJS</div>
-          <div className="tech">reactJS</div>
-          <div className="tech">javascript</div>
-          <div className="tech">node</div>
-          <div className="tech">ExpressJS</div>
-          <div className="tech">reactJS</div>
-          <div className="tech">javascript</div>
-          <div className="tech">node</div>
-          <div className="tech">ExpressJS</div>
+      <div className="sidePanelMain">
+        <div className="line" id="sidePanelTop">
+          <h1> Resume Generator </h1>
+          <button
+            id="sidePanelToggle"
+            onClick={() => props.setTrigger(false)}
+            className="sidePanelToggle"
+          >
+            X
+          </button>
         </div>
-      </div> */}
-      <div className="line">
-        <div className="TechnologySelect">
-          <Select
-            closeMenuOnSelect={false}
-            placeholder="Select Technologies..."
-            components={animatedComponents}
-            // defaultValue={["one", "two"]}
-            isMulti
-            options={options}
-          />
+        <div className="line">
+          <div className="TechnologySelect">
+            <Select
+              closeMenuOnSelect={false}
+              placeholder="Select Technologies..."
+              components={animatedComponents}
+              // defaultValue={["one", "two"]}
+              isMulti
+              options={skillsRef}
+            />
+          </div>
+        </div>
+        <div className="entrySelection">
+          <div className="selectTypeOfEntry">
+            <Select placeholder="Select type of entry..." options={options2} />
+          </div>
+          <div className="entriesToSelect">{suggestedEntries}</div>
         </div>
       </div>
-      <div className="entrySelection">
-        <div className="selectTypeOfEntry">
-          <Select placeholder="Select type of entry..." options={options2} />
-        </div>
-        <div className="entriesToSelect">{suggestedEntries}</div>
+
+      <div className="bottomLine">
+        <button className="exportPDF">Export as PDF</button>
+        <button className="exportDOCX">Export as DOCX</button>
       </div>
     </div>
   ) : (
