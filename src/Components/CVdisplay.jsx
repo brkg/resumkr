@@ -1,6 +1,6 @@
 import React from "react";
 
-const Title = (title, list) => {
+const Title = (title) => {
   return (
     <div className="sectionTitle">
       <div className="leftTitle">
