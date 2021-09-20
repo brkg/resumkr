@@ -68,7 +68,6 @@ function App() {
   function onSubmit(obj) {
     const tempCV = {...cv, fullName: obj.fullName, resumeTitle: obj.title, jobs: obj.jobs };
     setState({...state, cv: tempCV})
-    // console.log(state.cv);
   }
 
   return (
