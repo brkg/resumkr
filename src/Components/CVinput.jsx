@@ -51,20 +51,21 @@ function CVinput(props) {
 
   const submit = () => {
     const jobArray = getAllJobInfo();
-    axios.post('/api/job/1', {
-      jobs: jobArray,
-    })
-    .then(function (response) {
-      console.log(response);
-      props.updateJobs({
-        title: document.getElementById('title').value,
-        contact: document.getElementById('email').value,
-        jobs: jobArray
-      });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    //post stuff here
+    // axios.post('/api/job/1', {
+    //   jobs: jobArray,
+    // })
+    // .then(function (response) {
+    //   console.log(response);
+    //   props.updateJobs({
+    //     title: document.getElementById('title').value,
+    //     contact: document.getElementById('email').value,
+    //     jobs: jobArray
+    //   });
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
   };
 
   return props.trigger ? (
