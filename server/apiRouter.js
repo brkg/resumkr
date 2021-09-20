@@ -93,9 +93,9 @@ apiRouter.get('/skills/cv/:id',
 
 //Gets skills array of a Job of given ID
 apiRouter.get('/skills/job/:id',
-    // controller.getSkillsFromJobs,
+    controller.getSkillsFromJobs,
     (req, res) => {
-        res.status(200).json("res.locals.skills");
+        res.status(200).json(res.locals.skills);
     }
 )
 /*************************

@@ -181,7 +181,6 @@ controller.getSkillsFromJobs = async (req, res, next) => {
     const result = await db.query(GET_CVSKILLS_QUERY);
     const skill_id_array = [];
     const skill_name_array = [];
-    console.log(result)
     for (let i = 0; i < result.rows.length; i++) {
       skill_id_array.push(result.rows[i].skill_id);
       skill_name_array.push(result.rows[i].skill_name);
