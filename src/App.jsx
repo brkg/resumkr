@@ -26,11 +26,11 @@ const initialState = {
         skills: ["reactJS", "javascript", "PosteGreSQL", "ExpressJS"],
       },
       {
-        entryName: "Resumkr",
+        entryName: "NotResumkr",
         dates: ["20-01-01", "20-06-01"],
         content:
           "sjifoseofisoi efjiosjioefj esiofg p[tyojpkgtj soiefj iosjf \n awdawdawdaw ad adw awd rter trtertert awdwdad \n awdawdawdaw ad adw awd awdwdad",
-        skills: ["reactJS", "javascript", "PosteGreSQL", "ExpressJS"],
+        skills: ["C++", "Java", "MongoDB", "ExpressJS"],
       },
       {
         entryName: "Resumkr",
@@ -130,8 +130,13 @@ function App() {
   //add function to set the popup to false if the back says that the user is identified or has cookies.
 
   function onSubmit(obj) {
-    const tempCV = {...cv, fullName: obj.fullName, resumeTitle: obj.title, jobs: obj.jobs };
-    setState({...state, cv: tempCV})
+    const tempCV = {
+      ...cv,
+      fullName: obj.fullName,
+      resumeTitle: obj.title,
+      jobs: obj.jobs,
+    };
+    setState({ ...state, cv: tempCV });
   }
 
   return (

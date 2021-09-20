@@ -37,15 +37,27 @@ const animatedComponents = makeAnimated();
 
 export default function SidePanel(props) {
   const [suggestions, updateSuggestions] = useState([]);
+  const [selectedSkills, updateSelectedSkills] = useState([]);
 
   // const skillsRef = props.resume.skills;
 
   function onChangeInput(value) {
-    //if (value) console.log(value[0].value);
-    // console.log(props.resume.suggestedjobs[0]);
+    const newSkillSelection = [];
+    for (let i = 0; i < value.length; i++) {
+      // console.log(value[i].value);
+      newSkillSelection.push(value[i].value);
+    }
+    updateSelectedSkills(newSkillSelection);
     const newSuggestions = [];
-    for (let i = 0; i < props.resume.suggestedjobs.length; i++)
-      if (props.resume.suggestedjobs[i].skills.includes(selectedSkills)) {
+    for (let i = 0; i < props.resume.suggestedjobs.length; i++) {
+      console.log(newSkillSelection);
+      console.log(props.resume.suggestedjobs[i].skills);
+
+      if (
+        newSkillSelection.some((el) =>
+          props.resume.suggestedjobs[i].skills.includes(el)
+        )
+      ) {
         newSuggestions.push(
           <ResumeSuggestion
             key={i}
@@ -58,6 +70,7 @@ export default function SidePanel(props) {
           />
         );
       }
+    }
     console.log(newSuggestions);
     updateSuggestions(newSuggestions);
   }
