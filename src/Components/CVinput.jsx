@@ -7,11 +7,10 @@ const axios = require("axios").default;
 function CVinput(props) {
   const job = {
     id: -1,
-    company: '',
+    job_name: '',
     title: '',
-    years: '',
-    desc: '',
-    skills: ''
+    description: '',
+    skill_ids: ''
   }
   const initialArray = [
     <CVentry key="0" id="0" />,
@@ -35,29 +34,37 @@ function CVinput(props) {
   };
 
   const getAllJobInfo = () => {
-    infoArray.forEach(ele => {
+    const tempArray = [];
+    let ele;
+    for(let i = 0; i < infoArray.length; i++){
+      ele = infoArray[i];
       let HTMLelement = document.getElementById(ele.id).children[0];
-      ele.company = HTMLelement.firstChild.value;
+      ele.job_name = HTMLelement.firstChild.value;
       ele.title = HTMLelement.children[1].value;
-      ele.years = `${HTMLelement.children[2].value.toString()} - ${HTMLelement.children[3].value.toString()}`
-      ele.desc = HTMLelement.children[3].value;
-    })
-    return infoArray;
+      ele.description = HTMLelement.children[3].value;
+      ele.skill_ids = [];
+      if(ele.company === '' || ele.desc === '' || ele.title === '') continue;
+      tempArray.push(ele);
+    }
+    return tempArray;
   }
 
   const submit = () => {
     const jobArray = getAllJobInfo();
-    props.updateJobs({
-      title: document.getElementById('title').value,
-      jobs: jobArray
+    axios.post('/api/job/1', {
+      jobs: jobArray,
+    })
+    .then(function (response) {
+      console.log(response);
+      props.updateJobs({
+        title: document.getElementById('title').value,
+        contact: document.getElementById('email').value,
+        jobs: jobArray
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
     });
-     fetch("/api/submit", {
-      method: POST,
-       headers: {
-         "Content-Type": "Application/JSON",
-       },
-      body: JSON.stringify()
-     });
   };
 
   return props.trigger ? (

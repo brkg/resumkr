@@ -44,7 +44,7 @@ module.exports = {
       directory: path.join(__dirname, "src"),
     },
     proxy: {
-      "/api": "http://localhost:3000",
+      "/api ": "http://localhost:3000",
     },
     compress: true,
     port: 8080,
