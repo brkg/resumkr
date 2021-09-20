@@ -98,6 +98,10 @@ function App() {
       <button onClick={() => setSidePanelPopup(true)} className="SidePanelBtn">
         SidePanel
       </button> */}
+      <LoginSignUp trigger={loginPopup} setTrigger={setLoginPopup} />
+      <CVinput trigger={cvInputPage} setTrigger={setCvInputPage} />
+      <CVdisplay trigger={cvDisplayPage} setTrigger={setcvDisplayPage} />
+      <SidePanel trigger={sidePanelPopup} setTrigger={setSidePanelPopup} />
     </div>
   );
 }

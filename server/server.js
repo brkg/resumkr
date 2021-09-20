@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const app = express();
+const apiRouter = require('./apiRouter')
 
 // const apiRouter = require("./routes/api.js");
 const PORT = 3000;
@@ -19,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(express.static(path.resolve(__dirname, "../src")));
 
-// app.use("/api", apiRouter);
+app.use("/api", apiRouter);
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => res.status(404).send("<h1> 404 sorry dude </h1>"));
