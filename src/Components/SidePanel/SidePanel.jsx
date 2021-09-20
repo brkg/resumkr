@@ -44,9 +44,10 @@ export default function SidePanel(props) {
   function onChangeInput(value) {
     const newSkillSelection = [];
     for (let i = 0; i < value.length; i++) {
-      // console.log(value[i].value);
+      console.log(value[i].value);
       newSkillSelection.push(value[i].value);
     }
+    console.log(props.resume);
     updateSelectedSkills(newSkillSelection);
     const newSuggestions = [];
     for (let i = 0; i < props.resume.suggestedjobs.length; i++) {
@@ -75,7 +76,7 @@ export default function SidePanel(props) {
     updateSuggestions(newSuggestions);
   }
 
-  return true ? (
+  return props.trigger ? (
     <div className="sidePanel">
       <div className="sidePanelMain">
         <div className="line" id="sidePanelTop">

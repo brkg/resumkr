@@ -8,13 +8,16 @@ const axios = require("axios").default;
 
 const initialState = {
   cv: {
-    fullName: "",
+    _id: 0,
+    full_Name: "",
     contact: "", //stretch: contactInfo object with email, number, etc
-    resumeTitle: "",
+    // resumeTitle: "",
     education: "", //stringify before sending to backend, parse when received
     jobs: [],
-    skills: [],
+    skill_ids: [],
+    skill_name: [],
   },
+  skills_tables: {},
   resume: {
     jobs: [],
     suggestedjobs: [
@@ -72,7 +75,7 @@ const initialState = {
 
 function App() {
   const [loginPopup, setLoginPopup] = useState(true);
-  const [cvInputPage, setCvInputPage] = useState(true);
+  const [cvInputPage, setCvInputPage] = useState(false);
   const [cvDisplayPage, setcvDisplayPage] = useState(false);
   const [sidePanelPopup, setSidePanelPopup] = useState(false);
   const [cv, setCV] = useState(initialState.cv);
@@ -100,11 +103,19 @@ function App() {
 
   async function login(inputs) {
     try {
-      // const result = await axios.get("/api/auth", {
-      //   body: { username, password },
-      // });
-      console.log("login", inputs);
-      // if(!result.cv)
+      const { username, password } = inputs;
+      // console.log({ username: `${username}`, password: `${password}` });
+      const result = await axios.get("/api/auth", {
+        params: { username: `${username}`, password: `${password}` },
+      });
+      console.log("login", result.data);
+      if (result.data.cv) {
+        setState(result.data);
+        console.log(state);
+        setLoginPopup(false);
+        setSidePanelPopup(true);
+        setcvDisplayPage(true);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -166,7 +177,7 @@ function App() {
         spSuggestionsAdd={setSPsuggestions}
         hideSuggestion={(k) => setSPsuggestions(hideSuggestion(k))}
         addToResume={setresumeJobs}
-        resume={initialState.resume}
+        resume={state.resume}
       />
       {/* <button onClick={() => setLoginPopup(true)} className="Login/SignUpBtn">
         Login/SignUp

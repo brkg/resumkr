@@ -59,7 +59,7 @@ function CVinput(props) {
     // });
   };
 
-  return false ? (
+  return props.trigger ? (
     <div id="signupContainer">
       <div id="labelAndInput">
         <input type="text" id="name" placeholder="Full Name"></input>

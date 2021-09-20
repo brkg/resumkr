@@ -60,7 +60,7 @@ function CVdisplay(props) {
     );
   }
 
-  return true ? (
+  return props.trigger ? (
     <div className="cvDisplay">
       <div className="generalInfo">
         <div className="nameBlock">
