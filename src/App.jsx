@@ -17,6 +17,50 @@ const initialState = {
   },
   resume: {
     jobs: [],
+    suggestedjobs: [
+      {
+        entryName: "Resumkr",
+        dates: ["20-01-01", "20-06-01"],
+        content:
+          "sjifoseofisoi efjiosjioefj esiofg p[tyojpkgtj soiefj iosjf \n awdawdawdaw ad adw awd rter trtertert awdwdad \n awdawdawdaw ad adw awd awdwdad",
+        skills: ["reactJS", "javascript", "PosteGreSQL", "ExpressJS"],
+      },
+      {
+        entryName: "Resumkr",
+        dates: ["20-01-01", "20-06-01"],
+        content:
+          "sjifoseofisoi efjiosjioefj esiofg p[tyojpkgtj soiefj iosjf \n awdawdawdaw ad adw awd rter trtertert awdwdad \n awdawdawdaw ad adw awd awdwdad",
+        skills: ["reactJS", "javascript", "PosteGreSQL", "ExpressJS"],
+      },
+      {
+        entryName: "Resumkr",
+        dates: ["20-01-01", "20-06-01"],
+        content:
+          "sjifoseofisoi efjiosjioefj esiofg p[tyojpkgtj soiefj iosjf \n awdawdawdaw ad adw awd rter trtertert awdwdad \n awdawdawdaw ad adw awd awdwdad",
+        skills: ["reactJS", "javascript", "PosteGreSQL", "ExpressJS"],
+      },
+      {
+        entryName: "Resumkr",
+        dates: ["20-01-01", "20-06-01"],
+        content:
+          "sjifoseofisoi efjiosjioefj esiofg p[tyojpkgtj soiefj iosjf \n awdawdawdaw ad adw awd rter trtertert awdwdad \n awdawdawdaw ad adw awd awdwdad",
+        skills: ["reactJS", "javascript", "PosteGreSQL", "ExpressJS"],
+      },
+      {
+        entryName: "Resumkr",
+        dates: ["20-01-01", "20-06-01"],
+        content:
+          "sjifoseofisoi efjiosjioefj esiofg p[tyojpkgtj soiefj iosjf \n awdawdawdaw ad adw awd rter trtertert awdwdad \n awdawdawdaw ad adw awd awdwdad",
+        skills: ["reactJS", "javascript", "PosteGreSQL", "ExpressJS"],
+      },
+      {
+        entryName: "Resumkr",
+        dates: ["20-01-01", "20-06-01"],
+        content:
+          "sjifoseofisoi efjiosjioefj esiofg p[tyojpkgtj soiefj iosjf \n awdawdawdaw ad adw awd rter trtertert awdwdad \n awdawdawdaw ad adw awd awdwdad",
+        skills: ["reactJS", "javascript", "PosteGreSQL", "ExpressJS"],
+      },
+    ],
     skills: [],
   },
   // auth: {
@@ -33,6 +77,26 @@ function App() {
   const [sidePanelPopup, setSidePanelPopup] = useState(false);
   const [cv, setCV] = useState(initialState.cv);
   const [state, setState] = useState(initialState);
+
+  const [spSuggestions, setSPsuggestions] = useState(initialState);
+  const [resumeJobs, setresumeJobs] = useState(initialState);
+
+  // function addSuggestion(jobId) {
+  //   const newState = Object.assign({}, resumeJobs);
+  //   newState.resume.suggestedjobs.splice(jobId, 1);
+  //   return newState; // expects resume.suggestedjobs
+  // }
+  function hideSuggestion(jobId) {
+    console.log("Hiding that shit", jobId);
+    const newState = Object.assign({}, resumeJobs);
+    newState.resume.suggestedjobs.splice(jobId, 1);
+    return newState; // expects resume.suggestedjobs
+  }
+
+  // function addJob(jobs) {
+  //   const newState = Object.assign({}, initialState);
+  //   let tempJobs = newState.resume.jobs.splice();
+  // }
 
   async function login(inputs) {
     try {
@@ -94,7 +158,10 @@ function App() {
       <SidePanel
         trigger={sidePanelPopup}
         setTrigger={setSidePanelPopup}
-        resume={"state.resume"}
+        spSuggestionsAdd={setSPsuggestions}
+        hideSuggestion={(k) => setSPsuggestions(hideSuggestion(k))}
+        addToResume={setresumeJobs}
+        resume={initialState.resume}
       />
       {/* <button onClick={() => setLoginPopup(true)} className="Login/SignUpBtn">
         Login/SignUp

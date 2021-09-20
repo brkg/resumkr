@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import ResumeSuggestion from "./ResumeSuggestion";
@@ -9,34 +9,58 @@ const skillsRef = [
   { value: "ExpressJS", label: "ExpressJS" },
   { value: "MongoDB", label: "MongoDB" },
   { value: "PosteGreSQL", label: "PosteGreSQL" },
+  { value: "Python", label: "Python" },
+  { value: "Procedures", label: "Procedures" },
+  { value: "C++", label: "C++" },
+  { value: "Java", label: "Java" },
+  { value: "Database", label: "Database" },
+  { value: "GIT", label: "GIT" },
+  { value: "Linux", label: "Linux" },
+  { value: "Web Services", label: "Web Services" },
+  { value: "API", label: "API" },
+  { value: "Jenkins", label: "Jenkins" },
+  { value: "CSS", label: "CSS" },
+  { value: "Scrum", label: "Scrum" },
+  { value: "Vue", label: "Vue" },
+  { value: "Go", label: "Go" },
+  { value: "Ruby", label: "Ruby" },
+  { value: "C", label: "C" },
+  { value: "C#", label: "C#" },
 ];
 
-const options2 = [
-  { value: "Experience", label: "Experience" },
-  { value: "Education", label: "Education" },
-];
+// const options2 = [
+//   { value: "Experience", label: "Experience" },
+//   { value: "Education", label: "Education" },
+// ];
 
 const animatedComponents = makeAnimated();
 
 export default function SidePanel(props) {
-  const suggestedEntries = [];
+  const [suggestions, updateSuggestions] = useState([]);
 
-  const suggestion = {
-    entryName: "Amazon",
-    dates: ["20-01-01", "20-06-01"],
-    content:
-      "sjifoseofisoi efjiosjioefj esiofg p[tyojpkgtj soiefj iosjf \n awdawdawdaw ad adw awd rter trtertert awdwdad \n awdawdawdaw ad adw awd awdwdad",
-  };
-  for (let i = 0; i < 5; i++)
-    suggestedEntries.push(
-      <ResumeSuggestion
-        key={i}
-        id={i}
-        entryName={suggestion.entryName}
-        dates={suggestion.dates}
-        content={suggestion.content}
-      />
-    );
+  // const skillsRef = props.resume.skills;
+
+  function onChangeInput(value) {
+    //if (value) console.log(value[0].value);
+    // console.log(props.resume.suggestedjobs[0]);
+    const newSuggestions = [];
+    for (let i = 0; i < props.resume.suggestedjobs.length; i++)
+      if (props.resume.suggestedjobs[i].skills.includes(selectedSkills)) {
+        newSuggestions.push(
+          <ResumeSuggestion
+            key={i}
+            id={i}
+            entryName={props.resume.suggestedjobs[i].entryName}
+            dates={props.resume.suggestedjobs[i].dates}
+            content={props.resume.suggestedjobs[i].content}
+            addToResume={props.addToResume}
+            hideSuggestion={props.hideSuggestion}
+          />
+        );
+      }
+    console.log(newSuggestions);
+    updateSuggestions(newSuggestions);
+  }
 
   return true ? (
     <div className="sidePanel">
@@ -60,14 +84,15 @@ export default function SidePanel(props) {
               // defaultValue={["one", "two"]}
               isMulti
               options={skillsRef}
+              onChange={onChangeInput}
             />
           </div>
         </div>
         <div className="entrySelection">
-          <div className="selectTypeOfEntry">
+          {/* <div className="selectTypeOfEntry">
             <Select placeholder="Select type of entry..." options={options2} />
-          </div>
-          <div className="entriesToSelect">{suggestedEntries}</div>
+          </div> */}
+          <div className="entriesToSelect">{suggestions}</div>
         </div>
       </div>
 
