@@ -6,15 +6,30 @@ const apiRouter = express.Router();
 ***start of AUTH routes***
 *************************/
 //SignUp Function
+//Upon signup creates a new CV with the given full_name
+//adds a new Auth row
+//logs in and returns the full CV with Skills table.
 apiRouter.post('/auth',
+    controller.createCv,
+    controller.signup,
+    controller.login,
+    controller.getJobs,
+    controller.getCv,
+    controller.getSkills,
+    controller.creatCvObj,
     (req, res) => {
-    res.status(200).json('post signup');
+    res.status(200).json(res.locals.cvObj);
 });
 
 //Login Function
 apiRouter.get('/auth',
+    controller.login,
+    controller.getJobs,
+    controller.getCv,
+    controller.getSkills,
+    controller.creatCvObj,
     (req, res) => {
-    res.status(200).json('get login');
+    res.status(200).json(res.locals.cvObj);
 });
 /*************************
 ****end of AUTH routes****
@@ -25,6 +40,7 @@ apiRouter.get('/auth',
 *************************/
 //This will get all the information of a CV with given ID
 apiRouter.get('/cv/:id', 
+    controller.getJobs,
     controller.getCv, 
     (req, res) => {
     res.status(200).json(res.locals.cv);
@@ -34,7 +50,7 @@ apiRouter.get('/cv/:id',
 apiRouter.post('/cv',
     controller.createCv,
     (req, res) => {
-        res.status(200).json(res.locals.cvId);
+        res.status(200).json("CV Created");
     }
 )
 

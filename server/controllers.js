@@ -5,10 +5,24 @@ const controller = {};
 //ALL CV RELATED
 controller.getCv = async (req, res, next) => {
   //example GET to localhost/api/cv/3
-  const GET_CV_QUERY = `SELECT * FROM cv WHERE _id=${req.params.id}`;
+  let cv_Id;
+  if(req.params.id) cv_Id = req.params.id;
+  else if (res.locals.cvId) cv_Id = res.locals.cvId;
+  const GET_CV_QUERY = `SELECT * FROM cv WHERE _id=${cv_Id}`;
+
   try{
     const result = await db.query(GET_CV_QUERY);
     res.locals.cv = result.rows[0];
+    const GET_CVSKILLS_QUERY = `SELECT cv_skills.skill_id, skills.skill_name FROM cv_skills INNER JOIN skills ON skills.skill_name = skill_name  WHERE cv_skills.cv_id=${cv_Id} AND cv_skills.skill_id = skills._id`;
+    const skillResult = await db.query(GET_CVSKILLS_QUERY);
+    const skill_name_array = [];
+    
+    for (let i = 0; i < skillResult.rows.length; i++) {
+      skill_name_array.push(skillResult.rows[i].skill_name);
+    }
+    
+    res.locals.cv['skill_name'] = skill_name_array
+    res.locals.cv["jobs"] = res.locals.jobs;
     next();
   }
   catch{
@@ -25,7 +39,6 @@ controller.createCv = async (req, res, next) => {
   //createCv expects a full_name key in the body as an input
   //then outputs the ID of the created cv
   const ADD_CV_QUERY = 'INSERT INTO cv (full_name)' + ` VALUES ('${req.body.full_name}')`;
-                       //', '${req.body.education}', ARRAY [${res.locals.jobIds}],  ARRAY [${req.body.skills}]
 
   const GET_ID_QUERY = `SELECT last_value FROM cv_id_seq`;         
   
@@ -35,7 +48,6 @@ controller.createCv = async (req, res, next) => {
     // const GET_CV_QUERY = `SELECT * FROM cv WHERE _id=${cv_id.rows[0].last_value}`; 
     // const result = await db.query(GET_CV_QUERY);
     res.locals.cvId = cv_id.rows[0].last_value;
-    console.log(res.locals.cvId);
     next();
   }
   catch{
@@ -83,7 +95,7 @@ controller.createJob = async (req, res, next) => {
     for (let i = 0; i < req.body.jobs.length; i++){
       //add job to table
       ADD_CV_QUERY = 'INSERT INTO jobs (job_name, title, description, skill_ids, cv_id)'+
-                          ` VALUES ('${req.body.jobs[i].job_name}', '${req.body.jobs[i].title}', '${req.body.jobs[i].description}', ARRAY [${req.body.jobs[i].skills}], '${req.params.id}')`;           
+                          ` VALUES ('${req.body.jobs[i].job_name}', '${req.body.jobs[i].title}', '${req.body.jobs[i].description}', ARRAY [${req.body.jobs[i].skill_ids}], '${req.params.id}')`;           
       await db.query(ADD_CV_QUERY);
 
       //once added, gets the latest id added to table and saves it to result
@@ -107,17 +119,36 @@ controller.createJob = async (req, res, next) => {
 
 controller.getJobs = async (req, res, next) => {
   //example GET to localhost/api/job/3
-  const GET_CV_QUERY = `SELECT * FROM jobs WHERE cv_id=${req.params.id}`;
+  if(req.params.id) cv_Id = req.params.id;
+  else if (res.locals.cvId) cv_Id = res.locals.cvId;
+  const GET_CV_QUERY = `SELECT * FROM jobs WHERE cv_id=${cv_Id}`;
+  let GET_CVSKILLS_QUERY;
+  let skillResult;
+  let skill_id_array = [];
+  let skill_name_array = [];
+ 
   try{
     const result = await db.query(GET_CV_QUERY);
     res.locals.jobs = result.rows;
+    for (let i = 0; i < result.rows.length; i++){
+      GET_JOBSKILLS_QUERY = `SELECT jobs_skills.skill_id, skills.skill_name FROM jobs_skills INNER JOIN skills ON skills.skill_name = skill_name  WHERE jobs_skills.job_id=${result.rows[i]._id} AND jobs_skills.skill_id = skills._id`;
+      skillResult = await db.query(GET_JOBSKILLS_QUERY);
+      // skill_id_array = [];
+      skill_name_array = [];
+      for (let i = 0; i < skillResult.rows.length; i++) {
+        // skill_id_array.push(skillResult.rows[i].skill_id);
+        skill_name_array.push(skillResult.rows[i].skill_name);
+      }
+      res.locals.jobs[i]['skill_name'] = skill_name_array;
+    }
+    
     next();
   }
   catch{
     next({
-        log: "Error in Get CV",
+        log: "Error in Get Jobs",
         status: 400,
-        message: { err: "Error in Get CV" },
+        message: { err: "Error in Get Jobs" },
       });
   }
 
@@ -141,9 +172,9 @@ controller.getSkills = async (req, res, next) => {
   catch{
     next({
       //make relevant error message
-      log: "Error in retrieving skills",
+      log: "Error in Get skills",
       status: 400,
-      message: { err: "Error in retrieving skills" },
+      message: { err: "Error in Get skills" },
     })
   }
   
@@ -165,7 +196,6 @@ controller.getSkillsFromCv = async (req, res, next) => {
   }
   catch{
     next({
-        // console.log(req.query.id);
         log: "Error in Get Skills From Cv",
         status: 400,
         message: { err: "Get Skills From Cv" },
@@ -190,10 +220,9 @@ controller.getSkillsFromJobs = async (req, res, next) => {
   }
   catch{
     next({
-        // console.log(req.query.id);
-        log: "Error in Get CV",
+        log: "Error in Get Skills from Jobs",
         status: 400,
-        message: { err: "Error in Get CV" },
+        message: { err: "Error in Get Skills from Jobs" },
       });
   }
 
@@ -209,9 +238,9 @@ controller.addJobsSkills = async (req, res, next) => {
   let ADD_ID_REF_QUERY;
   try{
     for (let i = 0; i < res.locals.jobIds.length; i++){
-      for (let ii = 0; ii < req.body.jobs[i].skills.length; ii++){
+      for (let ii = 0; ii < req.body.jobs[i].skill_ids.length; ii++){
         ADD_ID_REF_QUERY = 'INSERT INTO jobs_skills (job_id, skill_id)'+
-                            ` VALUES ('${res.locals.jobIds[i]}', '${req.body.jobs[i].skills[ii]}')`
+                            ` VALUES ('${res.locals.jobIds[i]}', '${req.body.jobs[i].skill_ids[ii]}')`
         await db.query(ADD_ID_REF_QUERY);
       }
     }
@@ -253,7 +282,74 @@ controller.addCvSkills = async (req, res, next) => {
 
 
 //ALL AUTH RELATED
+controller.signup = async (req, res, next) => {
+  //Create an SQL command to get all skills from skills table
+  const ADD_USER_QUERY = 'INSERT INTO authentication (username, password, cv_id)\n'+
+                         `VALUES ('${req.body.username}','${req.body.password}',${res.locals.cvId})`;
 
+  try{
+    await db.query(ADD_USER_QUERY);
+    res.locals.username = req.body.username;
+    res.locals.password = req.body.password;
+    res.locals.signup = true;
+    next()
+  }
+  catch{
+    next({
+      log: "Error in Auth Signup",
+      status: 400,
+      message: { err: "Error in Auth Signup" },
+    })
+  }
+  
+};
 
+controller.login = async (req, res, next) => {
+  const username = req.body.username
+  const password = req.body.password
+  if(res.locals.signup){
+    const username = res.locals.username
+    const password = res.locals.password
+  }
+
+  const GET_USER_QUERY = `SELECT username, password, cv_id FROM authentication WHERE username='${username}'`;
+
+  try{
+  const result = await db.query(GET_USER_QUERY);
+  if (result.rows[0].password == password) {
+    res.locals.login = true;
+    res.locals.cvId = result.rows[0].cv_id;
+  }
+  else res.locals.login = false;
+
+  next()
+  }
+  catch{
+  next({
+  log: "Error in Auth Login",
+  status: 400,
+  message: { err: "Error in Auth Login" },
+  })
+  }
+
+};
+
+controller.creatCvObj = (req, res, next) => {
+  try{
+    res.locals.cvObj = {};
+    if(res.locals.login){
+      res.locals.cvObj.cv = res.locals.cv;
+      res.locals.cvObj.skills_table = res.locals.skills;
+    }
+    next()
+    }
+    catch{
+    next({
+    log: "Error in Auth Login",
+    status: 400,
+    message: { err: "Error in Auth Login" },
+    })
+    }
+}
 
 module.exports = controller;
