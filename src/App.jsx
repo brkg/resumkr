@@ -7,19 +7,22 @@ import { useState } from "react";
 const axios = require("axios").default;
 
 const initialState = {
-  fullName: "",
-  education: "", //stringify before sending to backend, parse when received
-  jobs: [],
-  skills: [],
+  cv: {
+    fullName: "",
+    education: "", //stringify before sending to backend, parse when received
+    jobs: [],
+    skills: [],
+  },
+  resume: {
+    jobs: [],
+    skills: [],
+  },
+  // auth: {
+  //   username: "",
+  //   password: "",
+  //   fullName: "",
+  // },
 };
-
-// const signInOauth = () => {
-//   console.log("signup", inputs);
-//   //Add Asynchronicity
-//   //here goes a function to submit a signup[POST] fetch request to the backend
-//   //await will need to be used before doing anything as we need to ensure the signup information is valid before proceeding..
-//   //one of the last functionnality will be props.setTrigger(false) to close the popup
-// };
 
 function App() {
   const [loginPopup, setLoginPopup] = useState(true);
@@ -48,10 +51,24 @@ function App() {
     }
   }
 
+  // async function signInOauth () {
+  //   console.log("signup", inputs);
+  //   //Add Asynchronicity
+  //   //here goes a function to submit a signup[POST] fetch request to the backend
+  //   //await will need to be used before doing anything as we need to ensure the signup information is valid before proceeding..
+  //   //one of the last functionnality will be props.setTrigger(false) to close the popup
+  // };
+
+  //add function to set the popup to false if the back says that the user is identified or has cookies.
+
   return (
     <div className="page">
       <div className="cvDisplayOuter">
-        <CVdisplay trigger={cvDisplayPage} setTrigger={setcvDisplayPage} />
+        <CVdisplay
+          trigger={cvDisplayPage}
+          setTrigger={setcvDisplayPage}
+          cv={"state.cv"}
+        />
       </div>
       <LoginSignUp
         trigger={loginPopup}
@@ -59,8 +76,16 @@ function App() {
         signup={signup}
         login={login}
       />
-      <CVinput trigger={cvInputPage} setTrigger={setCvInputPage} />
-      <SidePanel trigger={sidePanelPopup} setTrigger={setSidePanelPopup} />
+      <CVinput
+        trigger={cvInputPage}
+        setTrigger={setCvInputPage}
+        cv={"state.cv"}
+      />
+      <SidePanel
+        trigger={sidePanelPopup}
+        setTrigger={setSidePanelPopup}
+        resume={"state.resume"}
+      />
       {/* <button onClick={() => setLoginPopup(true)} className="Login/SignUpBtn">
         Login/SignUp
       </button>

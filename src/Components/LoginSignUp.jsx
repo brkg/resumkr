@@ -19,7 +19,7 @@ export default function LoginSignUp(props) {
     fullName,
   };
 
-  return props.trigger ? (
+  return false ? (
     <div className="LoginPopup">
       <div className="LoginPopup-inner">
         <h3> Authentication </h3>
