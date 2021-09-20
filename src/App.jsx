@@ -8,7 +8,7 @@ const axios = require("axios").default;
 
 const initialState = {
   cv: {
-    fullName: "",
+    full_name: "",
     contact: "", //stretch: contactInfo object with email, number, etc
     resumeTitle: "",
     education: "", //stringify before sending to backend, parse when received
@@ -130,7 +130,7 @@ function App() {
   //add function to set the popup to false if the back says that the user is identified or has cookies.
 
   function onSubmit(obj) {
-    const tempCV = {...cv, fullName: obj.fullName, resumeTitle: obj.title, jobs: obj.jobs };
+    const tempCV = {...cv, resumeTitle: obj.title, jobs: obj.jobs };
     setState({...state, cv: tempCV})
   }
 

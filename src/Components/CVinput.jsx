@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import CVentry from "./CVentry";
 
+const axios = require("axios").default;
+
 function CVinput(props) {
   const job = {
     id: -1,
@@ -46,24 +48,20 @@ function CVinput(props) {
   const submit = () => {
     const jobArray = getAllJobInfo();
     props.updateJobs({
-      fullName: document.getElementById('name').value,
       title: document.getElementById('title').value,
       jobs: jobArray
     });
-    // fetch("/api/submit", {
-      // method: POST,
-      // headers: {
-        // "Content-Type": "Application/JSON",
-      // },
+     fetch("/api/submit", {
+      method: POST,
+       headers: {
+         "Content-Type": "Application/JSON",
+       },
       body: JSON.stringify()
-    // });
+     });
   };
 
   return props.trigger ? (
-    <div id="signupContainer">
-      <div id="labelAndInput">
-        <input type="text" id="name" placeholder="Full Name"></input>
-      </div>
+    <div id="entryContainer">
       <div id="labelAndInput">
         <input type="text" id="title" placeholder="Job Title"></input>
       </div>
